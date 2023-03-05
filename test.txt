@@ -1,0 +1,4 @@
+Transaction replacement occurs when a 
+transaction seen by a node is conflicted 
+with and ultimately replaced by another 
+transaction. Typically, the replaced transaction 24
