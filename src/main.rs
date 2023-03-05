@@ -1,6 +1,6 @@
-use std::{env, fs::File, io::{Seek, BufReader, BufRead}};
+use std::{env, fs::File, io::{BufReader, BufRead}};
 use text_colorizer::*;
-
+use words_count;
 #[derive(Debug)]
 struct Argument {
     filename: String
@@ -44,8 +44,10 @@ fn counter<R: BufRead>(reader: &mut R) -> Result<u32, String> {
                 if line.is_empty() {
                         break;
                     }
-                total_words += count_words(&line);
+                let words_line =  words_count::count(&line);
                 line.clear();
+                let words = words_line.words as u32;
+                total_words += words;
             },
             Err(e) => {
                 return Err(e.to_string());
@@ -66,13 +68,3 @@ fn get_filename() -> Argument {
     Argument { filename: arg[0].clone() }
 }
 
-fn count_words(s: &str) -> u32 {
-    let mut count: u32 = 0;
-
-    for word in s.chars() {
-        if word.is_whitespace() {
-            count += 1;
-        }
-    }
-    count 
-}

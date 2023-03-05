@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 text-colorizer="1"
 regex="1"
+words-count="0.1.4"
